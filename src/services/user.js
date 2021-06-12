@@ -8,3 +8,13 @@ export const login = data => {
     data: qs.stringify(data)
   })
 }
+
+export const getUserInfo = () => {
+  return request({
+    method: 'GET',
+    url: '/front/user/getInfo'
+    // headers: {
+    //   Authorization: store.state.user.access_token
+    // }
+  })
+}

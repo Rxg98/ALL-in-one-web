@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import store from '@/store'
 
 // 插件
 Vue.use(VueRouter)
@@ -14,6 +15,7 @@ const routes = [
   {
     path: '/',
     component: () => import(/* webpackChunkName: 'layout' */'@/views/layout/index'),
+    meta: { requiresAuth: true },
     children: [
       {
         path: '',
@@ -68,6 +70,21 @@ const router = new VueRouter({
   routes
 })
 
-router.beforeEach(() => {})
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (!store.state.user) {
+      next({
+        name: 'login',
+        query: {
+          redirect: to.fullPath
+        }
+      })
+    } else {
+      next()
+    }
+  } else {
+    next()
+  }
+})
 
 export default router

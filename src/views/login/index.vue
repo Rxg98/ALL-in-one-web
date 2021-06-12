@@ -64,11 +64,9 @@ export default {
         const { data } = await login(this.form)
         this.isLoginLoading = false
         if (data.state === 1) {
-          this.$router.push({
-            name: 'home'
-          })
-          this.$message.success('登录成功')
           this.$store.commit('setUser', data.content)
+          this.$router.push(this.$route.query.redirect || '/')
+          this.$message.success('登录成功')
           console.log(this.$store.state.user)
         } else {
           this.$message.error('登录失败')
