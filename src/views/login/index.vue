@@ -67,7 +67,7 @@ export default {
           this.$store.commit('setUser', data.content)
           this.$router.push(this.$route.query.redirect || '/')
           this.$message.success('登录成功')
-          console.log(this.$store.state.user)
+          // console.log(this.$store.state.user)
         } else {
           this.$message.error('登录失败')
         }

@@ -49,6 +49,6 @@ export default {
   }
 
   .el-main {
-    background-color: #fff;
+    background-color: #FAFAFA;
   }
 </style>
